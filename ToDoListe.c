@@ -29,6 +29,8 @@ void addTask(struct TODOLIST tasks[MAX_TASKS]) {
 int showTasks(struct TODOLIST tasks[MAX_TASKS]) {
     char choose;
     int i;
+    int num = 0;
+    char done;
     if (taskCount == 0) {
         printf("You don't any tasks");
     } else {
@@ -37,15 +39,36 @@ int showTasks(struct TODOLIST tasks[MAX_TASKS]) {
         if (choose == 'a') {
             printf("Your completed tasks :\n");
             for (i = 0 ; i < taskCount ; i++) {
-                if (tasks[i].completed == 0) {
+                num++ ;
+                if (tasks[i].completed == 1) {
                     if (completedTasks == 0) {
                         printf("You don't complate any task .");
                     } else {
-                        printf("     %s.\n" , tasks[i].Tasks);
+                        printf("     %d : %s.\n" ,num , tasks[i].Tasks);
                     }
                 }
             }
+        } else if (choose == 'b') {
+            printf("Your incomplet tasks :\n");
+            for (i = 0 ; i < taskCount ; i++) {
+                num++ ;
+                if (tasks[i].completed == 0) {
+                    printf("     %d : %s.\n" , num , tasks[i].Tasks);
+                }
+            }
+        } else if (choose == 'c') {
+            printf("You all tasks : \n");
+            for (i = 0 ; i < taskCount ; i++) {
+                num++;
+                if (tasks[i].completed == 0) {
+                    done = 'a' ;
+                } else if (tasks[i].completed == 1) {
+                    done = 'b';
+                }
+                printf("     %d : %s . %c \n" , num , tasks[i].Tasks , done);
+            }
         }
+        
     }
     return 1;
 }
